@@ -1,2 +1,2 @@
 # EFCore-Scaffold-Angular-Recursive-Tree-Component-Demo
-This is a demo on how how Entity Framework Model can be created an existing database and
+Simple .NET Core App to demonstrate building Recursive Tree Component using Angular and Bootstrap explained in my blog.
