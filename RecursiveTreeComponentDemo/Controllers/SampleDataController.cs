@@ -2,7 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using EmployeeHierarchy.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace EmployeeHierarchy.Controllers
 {
@@ -39,6 +41,20 @@ namespace EmployeeHierarchy.Controllers
                     return 32 + (int)(TemperatureC / 0.5556);
                 }
             }
+        }
+        private readonly OrganizationContext _context;
+
+        public SampleDataController(OrganizationContext context)
+        {
+            _context = context;
+        }
+
+        //  GET: api/Employees
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<Employee>>> GetEmployee()
+        {
+            var temp = await _context.Employee.ToListAsync();
+            return temp;
         }
     }
 }

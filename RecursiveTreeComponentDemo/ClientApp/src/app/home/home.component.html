@@ -1,0 +1,21 @@
+
+<style>
+  ul {
+    list-style-type: none;
+  }
+
+  li {
+    list-style-type: none;
+  }
+</style>
+
+
+<div class="card bg-primary text-white" style="margin-top:50px; margin-left:50px; width:500px;">
+  <div class="card-header bg-success text-white"><b>Angular Bootstrap Recursive Tree Structure</b></div>
+  <div class="card-body">
+  <div *ngIf="employees" class="card-body">
+  <recursive-tree [treeData]="employees" [temp]="'my temp'"></recursive-tree>
+</div>
+  </div>
+</div>
+

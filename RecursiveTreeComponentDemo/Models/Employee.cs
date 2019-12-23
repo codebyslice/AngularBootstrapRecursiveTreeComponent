@@ -5,9 +5,12 @@ namespace EmployeeHierarchy.Models
 {
     public partial class Employee
     {
-        public Employee()
+        public Employee(int EmployeeId,string EmployeeName,int? ManagerId)
         {
-            Children = new HashSet<Employee>();
+            Children = new List<Employee>(); //new HashSet<Employee>();
+            this.EmployeeId = EmployeeId;
+            this.EmployeeName = EmployeeName;
+            this.ManagerId = ManagerId;
         }
 
         public int EmployeeId { get; set; }
@@ -15,6 +18,6 @@ namespace EmployeeHierarchy.Models
         public int? ManagerId { get; set; }
 
         public virtual Employee Manager { get; set; }
-        public virtual ICollection<Employee> Children { get; set; }
+        public virtual List<Employee> Children { get; set; }
     }
 }

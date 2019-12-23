@@ -1,0 +1,22 @@
+<style>
+  ul{
+    list-style-type:none;
+  }
+  li{
+    list-style-type:none;
+  }
+</style>
+<ul style="padding-left:20px;">
+
+  <li *ngFor="let node of treeData">
+    <span *ngIf="node.children?.length>0" (click)="toggleChildren(node)" class="glyphicon">
+
+      <i [ngClass]="{'glyphicon glyphicon-chevron-right': (node.visible==null || node.visible==false), 'glyphicon glyphicon-chevron-down':(node.visible==true)}"
+  aria-hidden="true"></i>
+    </span>
+    <p class="font-weight-normal panel-title" style="display:inline" [ngStyle]="{'padding-left':node.children?.length>0 ? '0px' : '20px' }">
+      {{node?.employeeName}}
+    </p>
+    <recursive-tree [treeData]="node.children" *ngIf=node.visible></recursive-tree>
+  </li>
+</ul>

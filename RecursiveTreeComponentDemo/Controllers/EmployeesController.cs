@@ -6,12 +6,13 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using EmployeeHierarchy.Models;
+using Microsoft.AspNetCore.Cors;
 
 namespace EmployeeHierarchy.Controllers
 {
     [Route("api/[controller]")]
-    [ApiController]
-    public class EmployeesController : ControllerBase
+    [EnableCors]
+    public class EmployeesController : Controller
     {
         private readonly OrganizationContext _context;
 
@@ -27,8 +28,28 @@ namespace EmployeeHierarchy.Controllers
             var temp = await _context.Employee.ToListAsync();
             return temp;
         }
+        [HttpGet("[action]")]
+        public IEnumerable<Employee> GetEmployees()
+        {
+            Employee john = new Employee(1, "John A", null);
+            Employee mike = new Employee(2, "Mike B", 1);
+            Employee anagha = new Employee(4, "Anagha P", 2);
+            Employee advith = new Employee(5, "Advith M", 2);
+            Employee ram = new Employee(6, "Ram D", 4);
+            Employee jack = new Employee(7, "Jack C", 4);
+            Employee raj = new Employee(3, "Raj C", 1);
 
-        // GET: api/Employees/5
+            john.Children = new List<Employee>() { mike, raj };
+            mike.Children = new List<Employee>() { anagha, advith };
+            anagha.Children = new List<Employee>() { ram, jack };
+
+            List<Employee> employees = new List<Employee>(){
+            john,mike,raj,anagha,advith,ram,jack
+            };
+
+            return employees;
+        }
+
         [HttpGet("{id}")]
         public async Task<ActionResult<Employee>> GetEmployee(int id)
         {
