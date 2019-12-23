@@ -47,7 +47,7 @@ namespace EmployeeHierarchy.Controllers
             john,mike,raj,anagha,advith,ram,jack
             };
 
-            return employees;
+            return employees.Where(x=>x.ManagerId==null);
         }
 
         [HttpGet("{id}")]
